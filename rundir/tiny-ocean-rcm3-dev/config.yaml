@@ -1,0 +1,65 @@
+# PBS configuration
+
+# If submitting to a different project to your default, uncomment line below 
+# and change project code as appropriate; also set shortpath below
+# project: x77
+
+# Force payu to always find, and save, files in this scratch project directory
+# (you may need to add the corresponding PBS -l storage flag in sync_data.sh)
+# shortpath: /scratch/v45
+
+queue: normal
+ncpus: 1
+jobfs: 10GB
+mem: 100GB
+
+walltime: 02:00:00
+jobname: tiny-ocean-rCM3
+
+model: access-om3
+
+exe: access-om3-MOM6
+input:
+        #    - /g/data/vk83/configurations/inputs/access-om3/share/meshes/global.100km/2024.01.25/access-om2-100km-ESMFmesh.nc
+        #    - /g/data/vk83/configurations/inputs/access-om3/share/meshes/global.100km/2024.01.25/access-om2-100km-nomask-ESMFmesh.nc
+    - /g/data/vk83/configurations/inputs/access-om3/share/meshes/share/2024.09.16/JRA55do-datm-ESMFmesh.nc
+    - /g/data/vk83/configurations/inputs/access-om3/share/meshes/share/2024.09.16/JRA55do-drof-ESMFmesh.nc
+    - /g/data/vk83/configurations/inputs/access-om3/share/grids/global.100km/2020.10.22/topog.nc
+      #    - /g/data/vk83/configurations/inputs/access-om3/mom/grids/mosaic/global.100km/2020.05.30/ocean_hgrid.nc
+      #    - /g/data/vk83/prerelease/configurations/inputs/access-om3/mom/grids/vertical/share/2025.03.12/ocean_vgrid.nc
+      #    - /g/data/vk83/configurations/inputs/access-om3/mom/initial_conditions/global.100km/2020.10.22/ocean_temp_salt.res.nc
+    - /g/data/vk83/configurations/inputs/access-om3/mom/surface_salt_restoring/global.100km/2020.05.30/salt_sfc_restore.nc
+    - /g/data/vk83/configurations/inputs/access-om3/cice/grids/global.100km/2024.05.14/kmt.nc
+    - /g/data/vk83/configurations/inputs/access-om3/cice/initial_conditions/global.100km/2023.07.28/iced.1900-01-01-10800.nc
+    - /g/data/qv56/replicas/input4MIPs/CMIP6Plus/OMIP/MRI/MRI-JRA55-do-1-6-0/
+    - /scratch/jk72/mxr581/regional_mom6_configs/tiny-ocean-rcm3-dev/hgrid.nc
+    - /scratch/jk72/mxr581/regional_mom6_configs/tiny-ocean-rcm3-dev/vcoord.nc
+    - /scratch/jk72/mxr581/regional_mom6_configs/tiny-ocean-rcm3-dev/bathymetry.nc
+    - /scratch/jk72/mxr581/regional_mom6_configs/tiny-ocean-rcm3-dev/init_tracers.nc
+    - /scratch/jk72/mxr581/regional_mom6_configs/tiny-ocean-rcm3-dev/init_eta.nc
+    - /scratch/jk72/mxr581/regional_mom6_configs/tiny-ocean-rcm3-dev/init_vel.nc
+    - /scratch/jk72/mxr581/regional_mom6_configs/tiny-ocean-rcm3-dev/forcing_obc_segment_001.nc
+    - /scratch/jk72/mxr581/regional_mom6_configs/tiny-ocean-rcm3-dev/forcing_obc_segment_002.nc
+    - /scratch/jk72/mxr581/regional_mom6_configs/tiny-ocean-rcm3-dev/forcing_obc_segment_003.nc
+    - /scratch/jk72/mxr581/regional_mom6_configs/tiny-ocean-rcm3-dev/forcing_obc_segment_004.nc
+    - /scratch/jk72/mxr581/regional_mom6_configs/tiny-ocean-rcm3-dev/grid_spec.nc
+    - /scratch/jk72/mxr581/regional_mom6_configs/tiny-ocean-rcm3-dev/ocean_mosaic.nc
+    - /scratch/jk72/mxr581/regional_mom6_configs/tiny-ocean-rcm3-dev/access-rom3-ESMFmesh.nc
+    - /scratch/jk72/mxr581/regional_mom6_configs/tiny-ocean-rcm3-dev/access-rom3-nomask-ESMFmesh.nc
+    - /scratch/jk72/mxr581/regional_mom6_configs/tiny-ocean-rcm3-dev/land_mask.nc
+collate: false
+runlog: true
+metadata: 
+    enable: false
+
+    #userscripts:
+    #archive: /usr/bin/bash /g/data/vk83/apps/om3-scripts/payu_config/archive.sh
+
+modules:
+    use:
+        - /g/data/vk83/modules
+    load:
+        - access-om3/2025.01.0
+        - nco/5.0.5
+
+payu_minimum_version: 1.1.6
