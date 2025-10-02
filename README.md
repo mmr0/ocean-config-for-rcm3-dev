@@ -13,6 +13,9 @@
 - `input/tiny-ocean-rcm3-dev/access-rom3-nomask-ESMFmesh.nc` is the ESMF mesh generated from `hgrid.nc` 
 
 ### About the model config
-- Tiny!! Nominal resolution 0.1 degrees, domain size 1 degree by 1 degree
+- Tiny!! Nominal resolution 0.1°, domain size 1° x 1° 
+- latitude_extent = [-47, -46]
+- longitude_extent = [141.5, 142.5]
+- date_range = ["2013-01-01", "2013-01-31"]
 - Runs on a single CPU
-- Fairly randonly chosen time period and domain extent
+- Note that the way that 'regional_mom6.py' grid generation works is that a 1°-wide domain at 0.1° resolution will give you 10 grid points in x (`NIGLOBAL = 10`), but the number of points in y (`NJGLOBAL`) will be set to give the same resolution (in km), on average, as the x direction, i.e., `NIGLOBAL` will only equal `NJGLOBAL` near the equator. For our domain which is centered on 46.5 S, `NJGLOBAL = 15`
